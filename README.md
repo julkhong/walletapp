@@ -39,8 +39,50 @@ go run cmd/main.go
 
 ## Architecture 
 Below is a simplified architecture diagram for wallet service.
+<br></br>
 ![alt text](static/wallet_service_architecture.png)
 
+## Service Directory
+```
+walletapp/
+├── cmd/
+│   └── main.go                    # App entry point: loads config, starts HTTP server
+│
+├── internal/
+│   ├── api/                       # REST API layer (HTTP handlers/controllers)
+│   │   └── handler.go             # Route setup and HTTP handlers
+│
+│   ├── config/                    # App configuration (env vars, DB URL)
+│   │   └── config.go              # Loads and returns config struct
+│
+│   ├── repository/                # DB access layer (PostgreSQL + Redis if used)
+│   │   ├── wallet_repo.go         # CRUD and query logic for wallet, user, transactions
+│   │   ├── redis_repo.go          # (optional) Redis operations for caching
+│   │   └── models.go              # Domain models: User, Wallet, Transaction
+│
+│   ├── service/                   # Business logic layer
+│   │   └── wallet_service.go      # Implements deposit, withdraw, transfer, etc.
+│
+│   ├── middleware/                # (optional) Middlewares for logging, auth, recovery
+│   │   └── logging.go             # Example logging middleware
+│
+│   └── utils/                     # (optional) Utility functions (e.g., ID generators)
+│       └── helpers.go             # JSON response helpers, UUID, validation, etc.
+│
+├── migrations/                    # SQL migration files
+│   └── 001_create_tables.sql      # SQL: CREATE TABLES for users, wallets, txns
+│
+├── test/                          # Unit and integration tests
+│   ├── wallet_service_test.go     # Business logic test
+│   └── api_test.go                # (optional) API integration test
+│
+├── .env                           # (optional) Environment variables
+├── go.mod                         # Go module file
+├── go.sum                         # Go dependencies checksum
+└── README.md                      # Project overview, setup, assumptions, decisions
+
+...
+```
 ## Notes
 
 
