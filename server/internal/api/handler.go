@@ -1,22 +1,39 @@
 package api
 
 import (
-    "net/http"
-    "github.com/go-chi/chi/v5"
-    "github.com/julkhong/walletapp/server/internal/service"
-    "github.com/julkhong/walletapp/server/internal/config"
+	"net/http"
+
+	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/sirupsen/logrus"
+
+	"github.com/julkhong/walletapp/server/internal/config"
+	"github.com/julkhong/walletapp/server/internal/service"
+)
+
+const (
+	serviceLogTag = "WALLET-SERVICE"
 )
 
 func SetupRouter(cfg *config.Config) http.Handler {
-    r := chi.NewRouter()
+	r := chi.NewRouter()
+	// recovers panic
+	r.Use(middleware.Recoverer)
 
-    walletService := service.NewWalletService(cfg)
+	logger := logrus.New()
+	logger.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp: true,
+	})
+	logger.SetLevel(logrus.InfoLevel)
+	logger.WithField("tag", serviceLogTag)
 
-    r.Post("/wallets/{id}/deposit", walletService.DepositHandler)
-    r.Post("/wallets/{id}/withdraw", walletService.WithdrawHandler)
-    r.Post("/wallets/{id}/transfer", walletService.TransferHandler)
-    r.Get("/wallets/{id}/balance", walletService.BalanceHandler)
-    r.Get("/wallets/{id}/transactions", walletService.TransactionHistoryHandler)
+	walletService := service.NewWalletService(cfg, logger)
 
-    return r
+	r.Post("/wallets/{id}/deposit", walletService.DepositHandler)
+	r.Post("/wallets/{id}/withdraw", walletService.WithdrawHandler)
+	r.Post("/wallets/transfer", walletService.TransferHandler)
+	r.Get("/wallets/{id}/balance", walletService.BalanceHandler)
+	r.Get("/wallets/{id}/transactions", walletService.TransactionHistoryHandler)
+
+	return r
 }
