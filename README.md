@@ -91,7 +91,7 @@ The project is certainly not perfect, I may have overlook certain things. I aime
 <b> Q: Which features you chose not to do in the submission</b><br>
 <b> A: </b>  I have included all features requested.
 
-<b> Q: How does it satisfy functional and non-functional</b><br>  requirements
+<b> Q: How does it satisfy functional and non-functional</b>  requirements<br>
 <b> A: </b>  I have included a list [above](#done-checklist).
 
 <b> Q: Does it follow engineering best practices?</b><br> 
