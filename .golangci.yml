@@ -1,0 +1,21 @@
+run:
+  timeout: 2m
+  skip-dirs:
+    - vendor
+
+linters:
+  enable:
+    - govet
+    - gofmt
+    - goimports
+    - staticcheck
+    - unused
+    - errcheck
+
+gofmt:
+  simplify: true
+
+issues:
+  exclude-use-default: false
+  exclude-dirs:
+    - vendor
