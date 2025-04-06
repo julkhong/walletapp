@@ -48,6 +48,69 @@ Test files are placed together directly with the code in the same folder.
 ## Data Schema
 ![](static/wallet_service_erd.png)
 
+## API Contract
+---
+
+#### 1. Deposit
+
+| Method | Endpoint                 | Headers                   | Request Body            | Success (200)                                                | Errors                                                                 |
+|--------|--------------------------|---------------------------|-------------------------|---------------------------------------------------------------|------------------------------------------------------------------------|
+| POST   | `/wallets/{id}/deposit`  | `Idempotency-Key: string` | `{ "amount": float }`   | `{ "status": "success", "data": { "message": "deposit success" } }` | 400: Missing/Invalid body or idempotency key<br>404: Wallet not found<br>500: Internal error |
+
+---
+
+#### 2. Withdraw
+
+| Method | Endpoint                  | Headers                   | Request Body            | Success (200)                                                 | Errors                                                                 |
+|--------|---------------------------|---------------------------|-------------------------|----------------------------------------------------------------|------------------------------------------------------------------------|
+| POST   | `/wallets/{id}/withdraw`  | `Idempotency-Key: string` | `{ "amount": float }`   | `{ "status": "success", "data": { "message": "withdraw success" } }` | 400: Invalid amount or insufficient balance<br>404: Wallet not found<br>500: Internal error |
+
+---
+
+#### 3. Transfer
+
+| Method | Endpoint             | Headers                   | Request Body                                                                                      | Success (200)                                                                                  | Errors                                                                                       |
+|--------|----------------------|---------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| POST   | `/wallets/transfer`  | `Idempotency-Key: string` | `{ "from_wallet_id": string, "to_wallet_id": string, "amount": float }`                          | `{ "status": "success", "data": { "message": "transfer success", "wallet_id": "...", "balance": float } }` | 400: Invalid UUID or amount<br>404: Sender/Receiver wallet not found<br>500: Transfer failure |
+
+---
+
+#### 4. Get Balance
+
+| Method | Endpoint                | Headers | Request Body | Success (200)                                                  | Errors                             |
+|--------|-------------------------|---------|--------------|------------------------------------------------------------------|------------------------------------|
+| GET    | `/wallets/{id}/balance` | –       | –            | `{ "status": "success", "data": { "wallet_id": string, "balance": float } }` | 400: Invalid UUID<br>404: Wallet not found<br>500: Database error |
+
+---
+
+#### 5. Transaction History
+
+| Method | Endpoint                         | Query Params                                                 | Success (200)                                         | Errors                      |
+|--------|----------------------------------|--------------------------------------------------------------|--------------------------------------------------------|-----------------------------|
+| GET    | `/wallets/{id}/transactions`     | `type`, `start`, `end`, `limit`, `offset` *(optional)*       | `{ "status": "success", "data": [Transaction] }`       | 400: Invalid wallet ID<br>500: Internal error |
+
+---
+
+#### Common Error Response Format
+
+```json
+{
+  "error": {
+    "code": <int>,
+    "message": "<description>"
+  }
+}
+```
+#### Common 200 Response Format
+```json
+{
+    "status": "success",
+    "data": {
+        "message": "deposit success"
+        ...
+    }
+}
+```
 
 ## Quick Demo 
 You may view the demo [here](https://drive.google.com/file/d/1spFN9AWM4AEYlmGOMS_d7stcpwWB3DuM/view?usp=sharing).
@@ -61,6 +124,7 @@ You may find the collection [here](https://drive.google.com/file/d/1MG27ojR61ljJ
 1. Uses Go
 2. Uses PostgreSQL
 3. Uses Redis
+4. Support mentioned features in RESTful design
 
 #### Additional technical details
 1. Adds idempotency keys to any tx 
@@ -76,7 +140,7 @@ You may find the collection [here](https://drive.google.com/file/d/1MG27ojR61ljJ
 ## Q&A
 <b> Q: Explain any decisions you made  </b><br>
 <b> A: </b>
-Before the project, I have done a simplified system design which only covered architecture and data schema. QPS, data usage, monitoring and more were dropped for the simplicity of this project. 
+Before the project, I have done a simplified system design which only covered architecture, api contract and data schema. QPS, data usage, monitoring and more were dropped for the simplicity of this project. 
 
 I intentionally balanced the complexity of this project by focusing on what was necessary, avoiding overengineering while ensuring the core features were well-implemented. I've added idempotency handling, linter, pre-commit hooks, structure in responses, makefile and more. But I also avoid using goroutine, channels (takes long time to debug) and other setup like CI/CD etc. For the purpose of this project, I have enabled full logs for debugging purposes.
 
