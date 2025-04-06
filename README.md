@@ -68,7 +68,7 @@ Test files are placed together directly with the code in the same folder.
 7. Follows good standard engineering practice
 
 ## Q&A
-<b> Q: Explain any decisions you made  </b>
+<b> Q: Explain any decisions you made  </b><br>
 <b> A: </b>
 Before the project, I have done a simplified system design which only covered architecture and data schema. QPS, data usage, monitoring and more were dropped for the simplicity of this project. 
 
@@ -76,23 +76,30 @@ I intentionally balanced the complexity of this project by focusing on what was 
 
 The project is certainly not perfect, I may have overlook certain things. I aimed to strike a balance between time spent and the overall quality of the project — including its architecture, design, and code — to ensure it was both well-structured and deliverable within a reasonable timeframe.
 
-<b> How to setup and run your code</b> 
+<b> Q: How to setup and run your code</b> <br>
 <b> A: </b> [Mentioned in Setup](#setup)
 
-<b> Highlight how should reviewer view your code</b> 
+<b> Q: Highlight how should reviewer view your code</b><br> 
 <b> A: </b>  After reading Readme to get the full info. Feel free to view it top-down from walletapp folder. The [service directory](#service-directory) is included above. 
 
-<b> Areas to be improved</b> 
+<b> Q: Areas to be improved</b><br> 
 <b> A: </b> If time permits, including more idiomatic ways of handling. Setting up more tests like automated tests, load tests and some benchmarking tests. Setting CI/CD.
 
-<b> How long you spent on the test</b> 
+<b> Q: How long you spent on the test</b><br>
 <b> A: </b>  ~12 hours.
 
-<b> Which features you chose not to do in the submission</b> 
+<b> Q: Which features you chose not to do in the submission</b><br>
 <b> A: </b>  I have included all features requested.
 
-<b> How does it satisfy functional and non-functional</b>  requirements
+<b> Q: How does it satisfy functional and non-functional</b><br>  requirements
 <b> A: </b>  I have included a list [above](#done-checklist).
 
-<b> Does it follow engineering best practices?</b> 
+<b> Q: Does it follow engineering best practices?</b><br> 
 <b> A: </b> Yes.
+
+## Thoughts
+Thanks for the opportunity to work on the project. It has been fun exploring the available libraries and be able to take full charge and write the codes from sratch. 
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
