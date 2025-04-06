@@ -49,6 +49,12 @@ Test files are placed together directly with the code in the same folder.
 ![](static/wallet_service_erd.png)
 
 
+## Quick Demo 
+You may view the demo [here](https://drive.google.com/file/d/1spFN9AWM4AEYlmGOMS_d7stcpwWB3DuM/view?usp=sharing).
+
+## Postman Collection
+You may find the collection [here](https://drive.google.com/file/d/1MG27ojR61ljJJorTkKiOBr-UYchWlCuM/view?usp=sharing).
+
 
 ## Done Checklist
 #### Mandatory
@@ -72,7 +78,7 @@ Test files are placed together directly with the code in the same folder.
 <b> A: </b>
 Before the project, I have done a simplified system design which only covered architecture and data schema. QPS, data usage, monitoring and more were dropped for the simplicity of this project. 
 
-I intentionally balanced the complexity of this project by focusing on what was necessary, avoiding overengineering while ensuring the core features were well-implemented. I've added idempotency handling, linter, pre-commit hooks, structure in responses, makefile and more. But I also avoid using goroutine, channels (takes long time to debug) and other setup like CI/CD etc.
+I intentionally balanced the complexity of this project by focusing on what was necessary, avoiding overengineering while ensuring the core features were well-implemented. I've added idempotency handling, linter, pre-commit hooks, structure in responses, makefile and more. But I also avoid using goroutine, channels (takes long time to debug) and other setup like CI/CD etc. For the purpose of this project, I have enabled full logs for debugging purposes.
 
 The project is certainly not perfect, I may have overlook certain things. I aimed to strike a balance between time spent and the overall quality of the project — including its architecture, design, and code — to ensure it was both well-structured and deliverable within a reasonable timeframe.
 
@@ -98,7 +104,7 @@ The project is certainly not perfect, I may have overlook certain things. I aime
 <b> A: </b> Yes.
 
 ## Thoughts
-Thanks for the opportunity to work on the project. It has been fun exploring the available libraries and be able to take full charge and write the codes from sratch. 
+Thanks for the opportunity to work on the project. It has been fun exploring the available libraries and be able to take full charge and write the codes from sratch again. 
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
