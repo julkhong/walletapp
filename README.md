@@ -8,6 +8,15 @@ A simple http wallet service written in Go.
 go mod tidy
 ```
 2. Setup your DB and Redis config in .env
+```
+DB_HOST=<db_host>
+DB_PORT=5432
+DB_USER=<db_user>
+DB_PASSWORD=<db_pass>
+DB_NAME=<db_name>
+REDIS_HOST=<redis_host>
+REDIS_PORT=6379
+```
 3. Run the server with DB and Redis
 ```
 make start
