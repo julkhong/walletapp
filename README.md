@@ -40,7 +40,7 @@ Below is a simplified architecture diagram for wallet service.
 walletapp/
 ├── cmd/                   # Application entry point
 ├── internal/              # Main application code
-│   ├── api/               # legacy HTTP handlers
+│   ├── api/               # Router
 │   ├── common/            # Shared utilities and helpers
 │   ├── config/            # Configuration loading (env, DB, Redis)
 │   ├── dao/               # Database and Redis access layer
